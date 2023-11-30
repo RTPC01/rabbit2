@@ -1,0 +1,44 @@
+<%- include('../partials/header') %>
+
+<div class="container col-lg-8">
+    <div class="card">
+        <h5 class="card-header">
+            포스트 수정하기
+        </h5>
+        <div class="card-body">
+            <form action="/posts/<%= post._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <textarea class="form-control" id="desc" name="description"><%= post.description %></textarea>
+                </div>
+
+                <div class="form-group mt-1">
+                    <div class="form-file custom-file">
+                        <input class="form-control" type="file"  id="image" name="image" multiple>
+                        <label class="form-file-label" for="image">
+                            <span class="form-file-text custom-file-label">Add more image(s)...</span>
+                            <span class="form-file-button">Browse</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <% post.image.forEach(function(img, i) {  %>
+    
+                    <img src="<%=img.thumbnail %>" class="img-thumbnail" alt="">
+                    <div class="form-check-inline">
+                        <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
+                    </div>
+                    <label for="image-<%=i%>">이미지 삭제</label>
+                    <% })%>
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-3">수정하기</button>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<%- include('../partials/footer') %>
