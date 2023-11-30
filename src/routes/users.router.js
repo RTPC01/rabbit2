@@ -1,6 +1,5 @@
 const express = require('express');
 const passport = require('passport');
-const sendMail = require('../mail/mail');
 const User = require('../models/users.model');
 const usersRouter = express.Router();
 

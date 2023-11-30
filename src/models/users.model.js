@@ -76,9 +76,7 @@ const userSchema = new mongoose.Schema({
     contact: {
         type: String,
         default: '데이터 없음'
-    },
-    friends: [{ type: String }],
-    friendsRequests: [{ type: String }]
+    }
 }, { timestamps: true })
 
 const saltRounds = 10;

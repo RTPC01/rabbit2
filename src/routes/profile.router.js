@@ -5,12 +5,10 @@ const router = express.Router({
 });
 const Post = require('../models/posts.model');
 const User = require('../models/users.model');
-const Resell = require('../models/resells.model');
 
 router.get('/', checkAuthenticated, async (req, res) => {
     try {
         const posts = await Post.find({ "author.id": req.params.id }).populate('comments').sort({ createdAt: -1 }).exec();
-        const resells = await Resell.find({ "author.id": req.params.id }).populate('comments').sort({ createdAt: -1 }).exec();
         const user = await User.findById(req.params.id).exec();
 
         if (!user) {
@@ -20,7 +18,6 @@ router.get('/', checkAuthenticated, async (req, res) => {
 
         res.render('profile', {
             posts: posts,
-            resells: resells,
             user: user
         });
     } catch (err) {

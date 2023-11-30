@@ -51,21 +51,6 @@
                     </div>
                 <% } %>
             </div>
-            <% if (currentUser._id.toString() === user._id.toString()) { %>
-            <div class="mb-2">
-                <%- include('../partials/create-resell') %>
-            </div>
-            <% } %>
-            <div class="mb-2">
-                <div class="card">
-                    <h5 class="card-header text-start"> 중고거래</h5>
-                    <div class="card-body">
-                        <% resells.forEach((resell) => { %>
-                            <%- include('../partials/resell-item', {resell: resell}) %>
-                        <% }) %>
-                    </div>
-                </div>
-             </div>
         </div>
 
         <div class="col-md-7">
@@ -90,8 +75,6 @@
 
 
 </div>
-
-<%- include('../partials/resell-modal') %>
 
 <%- include('../partials/post-modal') %>
 
