@@ -5,7 +5,7 @@
             프로필 수정하기
         </h5>
         <div class="card-body">
-            <form action="/profile/<%= user._id %>?_method=PUT" method="POST">
+            <form action="/profile/<%= user._id %>?_method=PUT" method="POST" novalidate enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="username">닉네임</label>
                     <input type="text" name="username" id="username" class="form-control" value="<%= user.username %>">
@@ -45,6 +45,11 @@
                     <input type="text" name="jibunAddress" id="jibunAddress" placeholder="지번주소" value="<%= user.jibunAddress %>" class="form-control" readonly>
                     <span id="guide" style="color:#999;display:none"></span>
                     <input type="text" name="detailAddress" id="detailAddress" placeholder="상세주소" value="<%= user.detailAddress %>" class="form-control">
+                </div>
+                <div>
+                    <label for="image">프로필 사진</label>
+                    <br>
+                    <input type="file" name="image" id="image">
                 </div>
                 <button type="submit" class="btn btn-primary mt-3">수정하기</button>
             </form>

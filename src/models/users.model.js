@@ -2,6 +2,15 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 
+const ProfileImageSchema = new mongoose.Schema({
+    url: String,
+    filename: String
+});
+
+ProfileImageSchema.virtual('thumbnail').get(function () {
+    return this.url.replace('/upload', '/upload/w_200');
+});
+
 const userSchema = new mongoose.Schema({
     email: {
         type: String,
@@ -76,7 +85,8 @@ const userSchema = new mongoose.Schema({
     contact: {
         type: String,
         default: '데이터 없음'
-    }
+    },
+    image: [ProfileImageSchema]
 }, { timestamps: true })
 
 const saltRounds = 10;

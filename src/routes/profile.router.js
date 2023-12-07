@@ -5,6 +5,9 @@ const router = express.Router({
 });
 const Post = require('../models/posts.model');
 const User = require('../models/users.model');
+const multer = require('multer');
+const { storage, cloudinary } = require("../cloudinary/index");
+const upload = multer({ storage }).array('image')
 
 router.get('/', checkAuthenticated, async (req, res) => {
     try {
@@ -33,17 +36,24 @@ router.get('/edit', checkIsMe, (req, res) => {
     })
 })
 
-router.put('/', checkIsMe, (req, res) => {
+router.put('/', checkIsMe, upload, async (req, res) => {
     // roadAddress에서 hometown 추출
     let hometown;
+    let image = req.files.map(f => ({ url: f.path, filename: f.filename }));
+
     if (req.body.roadAddress) {
         hometown = req.body.roadAddress.split(' ')[0];
     } else {
         hometown = "데이터 없음";
     }
 
+    if (req.body.image) {
+        image = req.body.image[0];
+    }
+
     // req.body에 hometown 추가
     req.body.hometown = hometown;
+    req.body.image = image;
 
     User.findByIdAndUpdate(req.params.id, req.body, (err, user) => {
         if (err || !user) {

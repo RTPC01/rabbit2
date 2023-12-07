@@ -36,15 +36,18 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/posts">Home</a>
                     </li>
-                    <li class+="nav-item">
-                        <a class="nav-link" href="/">임시</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">임시</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/profile/<%= currentUser._id %>">
                             <%= currentUser.username %>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand">
+                            <%if(!currentUser.image[0]) {%>
+                                <img style="border-radius: 20px;" src=<%= "https://res.cloudinary.com/djlee4yl2/image/upload/v1701306726/rabbit/jwb4m3kmstvoig1rto4o.png" %> alt="Profile" width="40px" height="40px">
+                            <% } else { %>
+                                <img style="border-radius: 20px;" src="<%= currentUser.image[0].url %>" alt="Profile" width="40px" height="40px">
+                            <% } %>
                         </a>
                     </li>
                     <li class="nav-item">
